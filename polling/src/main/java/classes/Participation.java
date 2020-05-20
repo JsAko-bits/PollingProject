@@ -1,6 +1,7 @@
 package classes;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 import javax.persistence.*;
 
@@ -10,13 +11,13 @@ import javax.persistence.*;
 	@NamedQuery(name="Paticipation.findAll", query="SELECT u FROM Participation u "),
 	@NamedQuery(name="Participation.findByPersonne", query="select u from Participation u join u.personne as p where p.email = :email"),
 	@NamedQuery(name="Participation.findBySondage", query="select u from Participation u join u.sondage as s where s.id = :sondageId"),
-	@NamedQuery(name="Participation.findByDate", query="select u from Participation u "),
+	@NamedQuery(name="Participation.findByDate", query="select u from Participation u from u.dateParticipation = :date"),
 })
 
 public class Participation {
 
 	private int id;
-	private Date dateParticipation;
+	private LocalDate dateParticipation;
 	private Personne personne;
 	private Sondage sondage;
 	
@@ -35,11 +36,11 @@ public class Participation {
 	}
 
 	@Temporal(TemporalType.DATE)
-	public Date getDateParticpation() {
+	public LocalDate getDateParticpation() {
 		return dateParticipation;
 	}
 
-	public void setDateParticpation(Date dateParticpation) {
+	public void setDateParticpation(LocalDate dateParticpation) {
 		this.dateParticipation = dateParticpation;
 	}
 
